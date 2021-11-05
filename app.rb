@@ -5,5 +5,5 @@ require_relative 'loading_scripts/env_loader'
 
 puts "Hello World"
 
-puts ENV['TEST_VAR']
+puts ENV['NEWVAR']
 puts "something else"
