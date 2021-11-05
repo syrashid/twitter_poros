@@ -1,3 +1,5 @@
+require 'json'
+
 require_relative 'twitter_services/user_lookup'
 
 class Router
@@ -13,9 +15,7 @@ class Router
     while @running
       print_options
       choice = gets.chomp.to_i
-      print `clear`
       perform_action(choice)
-      print `clear`
     end
   end
 
@@ -25,7 +25,7 @@ class Router
     puts "--------------------"
     puts "----- SERVICES -----"
     puts "--------------------"
-    puts "1. Post to your account"
+    puts "1. Look up user"
     puts "2. Retrieve stream for a user"
     puts "3. Exit"
     print "> "
@@ -45,7 +45,9 @@ class Router
   end
 
   def user_lookup
-    TwitterServices::UserLookup.new('ShyRadish').call
+    puts 'Username?'
+    username = gets.chomp
+    puts JSON.pretty_generate(JSON.parse(TwitterServices::UserLookup.new(username).call.payload))
   end
 end
 
