@@ -16,6 +16,7 @@ module TwitterServices
         }
 
         response = Faraday.get(url, params, headers)
+
         OpenStruct.new({success?: response.status == 200, payload: response.body})
       rescue => e
         puts e.message
